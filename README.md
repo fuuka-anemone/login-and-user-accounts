@@ -1,2 +1,8 @@
 # login-and-user-accounts
- simple program made in java - javafx that allows a user to create an account, login and see any other users information after logged in. 
+
+please, first read the repository's about.
+
+This projects enunciate was the next: 
+
+The teacher of a subject that you're currently studying wants to know general information about each one of his students to generate stadistics and has asked you to develop a program with graphical user interface that allows to *log in* to see the listing of accounts with their information. If a person that wants to log in doesn't have an user account, that person can create it through the Sign Up option.
+
