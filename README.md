@@ -2,7 +2,7 @@
 
 please, first read the repository's about.
 
-The compiled code is inside *.idea* since this was made using Intellij Idea. 
+The compiled code is inside *out/production/* since this was made using Intellij Idea. 
 
 The enunciate for this project was the next: 
 
