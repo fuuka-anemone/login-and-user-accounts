@@ -1,5 +1,6 @@
 package ui;
 
+import javafx.beans.binding.DoubleBinding;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -17,7 +18,6 @@ import model.UserAccount;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.Objects;
 
 
 public class ClassroomGUI {
@@ -89,13 +89,13 @@ public class ClassroomGUI {
     private ComboBox<String> fbComboBox;
 
     @FXML
-    ToggleGroup gender;
+    private ToggleGroup gender;
 
     private Classroom classroom;
 
-    private FileChooser fileChooser;
+    private final FileChooser fileChooser;
 
-    private Alert alert;
+    private final Alert alert;
 
     private UserAccount loggedAccount;
 
@@ -126,7 +126,7 @@ public class ClassroomGUI {
     //login button from login.
     @FXML
     public void loadAccountList(ActionEvent event) throws IOException {
-        if (logIn()){
+        if (login()){
             FXMLLoader loader = new FXMLLoader(getClass().getResource("account-list.fxml"));
             loader.setController(this);
             mainBorderPane.setCenter(loader.load());
@@ -142,7 +142,7 @@ public class ClassroomGUI {
         loader.setController(this);
         mainBorderPane.setCenter(loader.load());
         initializeGroups();
-        initializeCombobox();
+        initializeComboBox();
     }
 
     //logout button from account-list
@@ -160,14 +160,14 @@ public class ClassroomGUI {
         try {
             RadioButton selectedRadioButton = (RadioButton) gender.getSelectedToggle();
             classroom.getAccounts().add(new UserAccount(
-                    Objects.requireNonNull(bdDatePicker.getValue()),
-                    Objects.requireNonNull(checkIfStringEmpty(regUTextField.getText())),
-                    Objects.requireNonNull(checkIfStringEmpty(regPasswordField.getText())),
-                    Objects.requireNonNull(pfpTextField.getText()),
-                    Objects.requireNonNull(getCheckboxesValues()),
-                    Objects.requireNonNull(fbComboBox.getValue()),
+                    bdDatePicker.getValue(),
+                    checkIfStringEmpty(regUTextField.getText()),
+                    checkIfStringEmpty(regPasswordField.getText()),
+                    pfpTextField.getText(),
+                    getCheckBoxesValues(),
+                    fbComboBox.getValue(),
                     selectedRadioButton.getText()));
-            showAlert("Account created", Alert.AlertType.INFORMATION, "The new acount has been created");
+            showAlert("Account created", Alert.AlertType.INFORMATION, "The new account has been created");
         } catch (NullPointerException np) {
             showAlert("Validation Error", Alert.AlertType.ERROR, "You must fill each field in the form");
         }
@@ -197,18 +197,18 @@ public class ClassroomGUI {
         alert.showAndWait();
     }
 
-    public boolean logIn(){
+    public boolean login(){
         for (UserAccount ua : classroom.getAccounts()){
             if(ua.getUsername().equals(usernameTextField.getText()) && ua.getPassword().equals(passwordTextField.getText())){
                 loggedAccount = ua;
                 return true;
-            } else {
-                showAlert("Unable to Log In", Alert.AlertType.ERROR, "The username or password is incorrect");
             }
-        } return false;
+        }
+        showAlert("Unable to Log In", Alert.AlertType.ERROR, "The username or password is incorrect");
+        return false;
     }
 
-    public String getCheckboxesValues(){
+    public String getCheckBoxesValues(){
         if (seCheckBox.isSelected() || teCheckBox.isSelected() || ieCheckbox.isSelected()) {
             String careers = "";
             if (seCheckBox.isSelected()) {
@@ -219,6 +219,8 @@ public class ClassroomGUI {
             }
             if (ieCheckbox.isSelected()) {
                 careers += ieCheckbox.getText();
+            } if(careers.length() == (seCheckBox.getText().length()+2) || careers.length() == (teCheckBox.getText().length()+2)){
+                careers = careers.trim().replace(",","");
             }
             return careers;
         } else {
@@ -226,7 +228,7 @@ public class ClassroomGUI {
         }
     }
 
-    public void initializeCombobox(){
+    public void initializeComboBox(){
         ObservableList<String> browsers = FXCollections.observableArrayList("Chrome", "Firefox", "Opera", "Tor", "Edge");
         fbComboBox.setItems(browsers);
     }
@@ -243,6 +245,8 @@ public class ClassroomGUI {
     }
 
     private void setTableView() {
+        DoubleBinding usedWidth = userTableColumn.widthProperty().add(genTableColumn.widthProperty()).add(bdTableColumn.widthProperty()).add(bdTableColumn.widthProperty());
+        carTableColumn.prefWidthProperty().bind(uaiTableView.widthProperty().subtract(usedWidth));
         try {
             ObservableList<UserAccount> data = FXCollections.observableArrayList(classroom.getAccounts());
             uaiTableView.setItems(data);

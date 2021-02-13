@@ -6,7 +6,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-
+<?import javafx.scene.text.Font?>
 
 <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
@@ -14,6 +14,9 @@
          <VBox.margin>
             <Insets bottom="10.0" top="10.0" />
          </VBox.margin>
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
       </Label>
       <HBox alignment="CENTER" prefHeight="70.0" prefWidth="600.0">
          <children>
@@ -21,6 +24,9 @@
                <HBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </HBox.margin>
+               <font>
+                  <Font size="14.0" />
+               </font>
             </Label>
             <TextField fx:id="usernameTextField">
                <HBox.margin>
@@ -35,6 +41,9 @@
                <HBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </HBox.margin>
+               <font>
+                  <Font size="14.0" />
+               </font>
             </Label>
             <TextField fx:id="passwordTextField">
                <HBox.margin>
@@ -45,15 +54,21 @@
       </HBox>
       <HBox alignment="TOP_CENTER" prefHeight="90.0" prefWidth="600.0">
          <children>
-            <Button mnemonicParsing="false" onAction="#loadSignUp" text="Sing Up">
+            <Button mnemonicParsing="false" onAction="#loadSignUp" prefHeight="30.0" prefWidth="70.0" style="-fx-background-color: #5399c2;" text="Sing Up" textFill="WHITE">
                <HBox.margin>
                   <Insets bottom="10.0" left="15.0" right="15.0" top="10.0" />
                </HBox.margin>
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
             </Button>
-            <Button mnemonicParsing="false" onAction="#loadAccountList" text="Log In">
+            <Button mnemonicParsing="false" onAction="#loadAccountList" prefHeight="30.0" prefWidth="70.0" style="-fx-background-color: #5399c2;" text="Log In" textFill="WHITE">
                <HBox.margin>
                   <Insets bottom="10.0" left="15.0" right="15.0" top="10.0" />
                </HBox.margin>
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
             </Button>
          </children>
       </HBox>
