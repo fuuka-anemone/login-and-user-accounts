@@ -5,9 +5,9 @@ import java.time.LocalDate;
 public class UserAccount {
 
 
-    private LocalDate birthday;
+    private final LocalDate birthday;
 
-    private String username, password, profilePhoto, careers, favoriteBrowser, gender;
+    private final String username, password, profilePhoto, careers, favoriteBrowser, gender;
 
     public UserAccount(LocalDate birthday, String username, String password, String profilePhoto, String careers, String favoriteBrowser, String gender) {
         this.birthday = birthday;

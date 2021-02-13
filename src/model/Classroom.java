@@ -14,4 +14,8 @@ public class Classroom {
     public List<UserAccount> getAccounts() {
         return accounts;
     }
+
+    public void setAccounts(List<UserAccount> accounts) {
+        this.accounts = accounts;
+    }
 }

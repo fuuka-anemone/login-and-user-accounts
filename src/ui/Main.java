@@ -4,13 +4,15 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import model.Classroom;
 
 public class Main extends Application {
 
     private ClassroomGUI cgui;
+    private Classroom cr;
 
     public Main(){
-        cgui = new ClassroomGUI();
+        cgui = new ClassroomGUI(cr = new Classroom());
     }
 
     @Override
